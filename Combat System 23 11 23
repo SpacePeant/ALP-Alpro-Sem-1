@@ -1,0 +1,207 @@
+using System;
+using System.Security.Cryptography.X509Certificates;
+
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+
+        int[] potion = new int[5]; //int[0] = Potion, int[1] = Big Potion, int[2] = Full Potion, int[3] = Energy Potion, int[4] = Full energy potion
+        int[] equipment = new int[4]; 
+        int[] weapon = new int[4];
+        int[] poin = new int[4]; //int[0] = health, int[1] = attack, int [2] = defense, int [3] = energy
+        int level = 1;
+        int coin = 10;
+        int stage = 3;
+
+        Console.Write("Username :");
+        string Name = Convert.ToString(Console.ReadLine());
+        Console.WriteLine("Class :");
+        Console.WriteLine("(1) Tank");
+        Console.WriteLine("(2) Marksman");
+        Console.WriteLine("(3) Knight");
+        Console.WriteLine("(4) Mage");
+        Console.Write("Choose your class :");
+        int choice = int.Parse(Console.ReadLine());
+        //Random random = new Random();
+        //int hasil = random.Next(0, 101);
+        //if (hasil > 70)
+        //{
+            
+        //}
+        if (choice == 1)
+        {
+            poin [0] = 300;
+            poin [1] = 20;
+            poin [2] = 30;
+            poin [3] = 50;
+            gameplay1(stage, coin, Name, potion, poin);
+        }
+        else if (choice == 2)
+        {
+            poin[0]  = 150;
+            poin[1] = 50;
+            poin[2] = 10;
+            poin[3] = 50;
+            gameplay1(stage, coin, Name, potion, poin);
+        }
+        else if (choice == 3)
+        {
+            poin[0] = 200;
+            poin[1] = 40;
+            poin[2] = 25;
+            poin[3] = 50;
+            gameplay1(stage, coin, Name, potion, poin);
+        }
+        else if (choice == 4)
+        {
+            poin[0] = 100;
+            poin[1] = 100;
+            poin[2] = 5;
+            poin[3] = 200;
+            gameplay1(stage, coin, Name, potion, poin);
+        }
+
+        gameplay1(stage, coin, Name, potion, poin);
+    }
+    private static void gameplay1(int stage, int coin, string Name, int[]potion, int[]poin)
+    {
+        for (int i = 0; i > stage; i++)
+        {
+            Shop(coin, potion);
+            Combat(i, stage, Name, poin);
+        }
+    }
+    private static void Combat(int stage, int i, string Name, int[]poin)
+    {
+        int Guardian1HP = 100;
+        int Guardian1Def = 10;
+        if (i == stage)
+        {
+            //boss fight
+        }
+        else
+        {
+            //normal fight
+            Console.WriteLine("Guardian Lv.1");
+            Console.WriteLine("HP :" + Guardian1HP);
+            Console.WriteLine("Defense : 0");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine(Name);
+            Console.WriteLine("HP :" + poin[1]);
+            Console.WriteLine("Defense : " + poin[2]);
+            Console.WriteLine(" _________________________");
+            Console.WriteLine("|  (1)Attack              |");
+            Console.WriteLine("|                         |");
+            Console.WriteLine("|  (2)Run      (3)Items   |");
+            Console.WriteLine(" -------------------------");
+            Console.WriteLine("Choose Action :");
+            int actionC1 =int.Parse(Console.ReadLine());
+            if (actionC1 == 1)
+            {
+                Guardian1HP -= poin[1]; //how should the attack percentile be?
+
+            }
+        }
+        
+    }
+    private static void Shop(int coin, int[]potion)
+    {
+        Console.WriteLine("|------------------------|");
+        Console.WriteLine("| Welcome to the Shop    |");
+        Console.WriteLine("|                        |");
+        Console.WriteLine("| (1) Potion          $5 |");
+        Console.WriteLine("| (2) Big Potion      $10|");
+        Console.WriteLine("| (3) Full Potion     $20|");
+        Console.WriteLine("| (4) Energy Potion   $7 |");
+        Console.WriteLine("| (5) Full Energy Pot $14|");
+        Console.WriteLine("|------------------------|");
+        Console.WriteLine("Which item do you want to buy?");
+        int choice = int.Parse(Console.ReadLine());
+
+        if (coin > 0)
+        {
+            if (choice == 1)
+            {
+                Console.WriteLine("How much do you want to buy?");
+                int quantity = int.Parse(Console.ReadLine());
+                if (coin >= quantity * 5)
+                {
+                    coin -= 5 * quantity;
+                    Console.WriteLine("Potion + " + quantity);
+                    potion[0] += quantity;
+                }
+                else
+                {
+                    Console.WriteLine("Coin Not Enough");
+                }
+            }
+            else if (choice == 2)
+            {
+                Console.WriteLine("How much do you want to buy?");
+                int quantity = int.Parse(Console.ReadLine());
+                if (coin >= quantity * 10)
+                {
+                    coin -= 10 * quantity;
+                    Console.WriteLine("Big Potion + " + quantity);
+                    potion[1] += quantity;
+                }
+                else
+                {
+                    Console.WriteLine("Coin Not Enough");
+                }
+            }
+            else if (choice == 3)
+            {
+                Console.WriteLine("How much do you want to buy?");
+                int quantity = int.Parse(Console.ReadLine());
+                if (coin >= quantity * 20)
+                {
+                    coin -= 20 * quantity;
+                    Console.WriteLine("Full Potion + " + quantity);
+                    potion[2] += quantity;
+                }
+                else
+                {
+                    Console.WriteLine("Coin Not Enough");
+                }
+            }
+            else if (choice == 4)
+            {
+                Console.WriteLine("How much do you want to buy?");
+                int quantity = int.Parse(Console.ReadLine());
+                if (coin >= quantity * 7)
+                {
+                    coin -= 7 * quantity;
+                    Console.WriteLine("Energy Potion + " + quantity);
+                    potion[3] += quantity;
+                }
+                else
+                {
+                    Console.WriteLine("Coin Not Enough");
+                }
+            }
+            else if (choice == 5)
+            {
+                Console.WriteLine("How much do you want to buy?");
+                int quantity = int.Parse(Console.ReadLine());
+                if (coin >= quantity * 14)
+                {
+                    coin -= 14 * quantity;
+                    Console.WriteLine("Full Energy Potion + " + quantity);
+                    potion[4] += quantity;
+                }
+                else
+                {
+                    Console.WriteLine("Coin Not Enough");
+                }
+            }
+        }
+        else 
+        {
+            Console.WriteLine("Coin Not Enough");
+        }
+    }
+
+}
